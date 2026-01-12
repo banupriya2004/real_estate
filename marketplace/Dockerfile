@@ -1,18 +1,20 @@
-# Stage 1: Build the application using Maven and Java 21
-FROM maven:3.9.6-eclipse-temurin-21 AS build
+# Use a Maven image to build the app
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+
+# Copy the code
 COPY . .
-# This command compiles both Java and Kotlin files
+
+# ⚠️ CRITICAL FIX: Limit Maven memory usage to prevent crashing on Free Tier
+ENV MAVEN_OPTS="-Xmx256m"
+
+# Build the app (skipping tests to save time and memory)
 RUN mvn clean package -DskipTests
 
-# Stage 2: Create the lightweight final image
-FROM eclipse-temurin:21-jdk-alpine
+# Use a lightweight Java image to run the app
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-# Copy the built jar file from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose the port (Render will use this)
-EXPOSE 8080
-
-# Run the application
+# Run the app
 ENTRYPOINT ["java", "-jar", "app.jar"]
