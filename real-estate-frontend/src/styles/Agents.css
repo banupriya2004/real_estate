@@ -1,0 +1,70 @@
+.agents-page {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  background-color: #0d2742;
+}
+
+.agents-card {
+  width: 80%;
+  background: #304861;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.agents-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.agent-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.agent-table th {
+  background: #0d2742;
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+.agent-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.agent-table tr:hover {
+  background: #f3f4f6;
+}
+
+.add-btn {
+  background: #16a34a;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: #2563eb;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #dc2626;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

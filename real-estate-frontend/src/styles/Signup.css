@@ -1,0 +1,33 @@
+.signup-container {
+  margin-left: 240px;     /* space for vertical navbar */
+  margin-top: 80px;
+  width: 320px;
+  padding: 25px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.signup-container input,
+.signup-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.signup-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e1e2f;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.signup-container button:hover {
+  background-color: #343454;
+}

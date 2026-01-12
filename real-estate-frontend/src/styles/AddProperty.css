@@ -1,0 +1,50 @@
+.add-property-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-property-form {
+  width: 400px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.add-property-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-property-form input,
+.add-property-form select,
+.add-property-form textarea {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.add-property-form input[type="file"] {
+  border: none;
+}
+
+.add-property-form button {
+  background-color: #0d2742;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-property-form button:hover {
+  background-color: #163d63;
+}

@@ -1,0 +1,41 @@
+.agent-container {
+  width: 350px;
+  margin: 80px auto;
+  padding: 25px;
+  border-radius: 8px;
+  background-color: #f4f7fa;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.agent-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.agent-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.agent-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.agent-container button:hover {
+  background-color: #218838;
+}
+
+.message {
+  margin-top: 15px;
+  font-weight: bold;
+}

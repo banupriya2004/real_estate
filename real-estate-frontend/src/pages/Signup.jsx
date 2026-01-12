@@ -1,0 +1,134 @@
+import React, { useState } from "react";
+import "../styles/Signup.css";
+import { useNavigate } from "react-router-dom";
+
+const Signup = () => {
+  const navigate = useNavigate();
+
+  // 1️⃣ Define the Regex here so it is not "undefined"
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "BUYER",
+    mobileNumber: "" // ✅ Changed from 'phone' to match Backend Entity & Input value
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    // 2️⃣ Regex check now works because variable is defined
+    if (!emailRegex.test(form.email)) {
+      setError("Please enter a valid email address (e.g., user@gmail.com)");
+      return;
+    }
+
+    console.log("Sending data:", form);
+
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      });
+
+      const data = await response.json();
+      console.log("Response:", data);
+
+      if (!response.ok) {
+        setError(data.message || "Signup failed");
+        return;
+      }
+
+      navigate("/login");
+
+    } catch (err) {
+      console.error("Signup error:", err);
+      setError("Server error. Try again later.");
+    }
+  };
+
+  return (
+    <div className="signup-container">
+      <h2>Create Account</h2>
+
+      {error && <p className="error">{error}</p>}
+
+      <form onSubmit={handleSignup}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={(e) => {
+            handleChange(e);
+            // ✅ Real-time validation
+            if (!emailRegex.test(e.target.value)) {
+              setError("Invalid email format");
+            } else {
+              setError("");
+            }
+          }}
+          required
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+          required
+        />
+
+        {/* ✅ FIXED: name="mobileNumber" matches state key and Java Entity */}
+        <input
+          type="tel"
+          name="mobileNumber"
+          placeholder="Mobile Number"
+          value={form.mobileNumber} 
+          onChange={handleChange}
+          pattern="[0-9]{10}"
+          title="Enter 10 digit phone number"
+          required
+        />
+
+        <select
+          name="role"
+          value={form.role}
+          onChange={handleChange}
+        >
+          <option value="BUYER">Buyer</option>
+          <option value="AGENT">Agent</option>
+        </select>
+
+        <button type="submit">Signup</button>
+      </form>
+    </div>
+  );
+};
+
+export default Signup;
