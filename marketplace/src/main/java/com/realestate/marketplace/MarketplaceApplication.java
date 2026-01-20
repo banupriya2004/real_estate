@@ -22,4 +22,9 @@ public class MarketplaceApplication {
         };
     }
 
+    // Keep your test endpoint
+    @GetMapping("/test")
+    public String test() {
+        return "Server is updated and CORS is enabled!";
+    }
 }
