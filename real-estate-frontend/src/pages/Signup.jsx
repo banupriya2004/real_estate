@@ -123,6 +123,7 @@ const Signup = () => {
         >
           <option value="BUYER">Buyer</option>
           <option value="AGENT">Agent</option>
+          <option value="ADMIN">Admin</option>
         </select>
 
         <button type="submit">Signup</button>
