@@ -1,20 +1,25 @@
-# Use a Maven image to build the app
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+# Stage 1: Build the application using Maven with Java 21
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Copy the code
-COPY . .
+# Copy only the pom.xml first to leverage Docker cache for dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
 
-# ⚠️ CRITICAL FIX: Limit Maven memory usage to prevent crashing on Free Tier
-ENV MAVEN_OPTS="-Xmx256m"
-
-# Build the app (skipping tests to save time and memory)
+# Copy the source code and build the JAR
+COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Use a lightweight Java image to run the app
-FROM eclipse-temurin:17-jre-alpine
+# Stage 2: Run the application using Java 21 JRE
+FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
+
+# Copy the built JAR from the 'build' stage
+# This wildcard ensures it finds your JAR regardless of the project name
 COPY --from=build /app/target/*.jar app.jar
 
-# Run the app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Standard port for Spring Boot
+EXPOSE 8080
+
+# Run the application with optimized memory settings for cloud environments
+ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75.0", "-jar", "app.jar"]
