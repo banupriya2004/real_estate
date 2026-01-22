@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigate = useNavigate();
 
-  // 1️⃣ Define the Regex here so it is not "undefined"
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const [form, setForm] = useState({
@@ -13,7 +12,7 @@ const Signup = () => {
     email: "",
     password: "",
     role: "BUYER",
-    mobileNumber: "" // ✅ Changed from 'phone' to match Backend Entity & Input value
+    mobileNumber: ""
   });
 
   const [error, setError] = useState("");
@@ -29,7 +28,6 @@ const Signup = () => {
     e.preventDefault();
     setError("");
 
-    // 2️⃣ Regex check now works because variable is defined
     if (!emailRegex.test(form.email)) {
       setError("Please enter a valid email address (e.g., user@gmail.com)");
       return;
@@ -47,7 +45,6 @@ const Signup = () => {
       });
 
       const data = await response.json();
-      console.log("Response:", data);
 
       if (!response.ok) {
         setError(data.message || "Signup failed");
@@ -63,71 +60,72 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup-container">
-      <h2>Create Account</h2>
+    // ✅ ADDED WRAPPER FOR CENTERING
+    <div className="signup-page">
+      <div className="signup-container">
+        <h2>Create Account</h2>
 
-      {error && <p className="error">{error}</p>}
+        {error && <p className="error">{error}</p>}
 
-      <form onSubmit={handleSignup}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
+        <form onSubmit={handleSignup}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) => {
-            handleChange(e);
-            // ✅ Real-time validation
-            if (!emailRegex.test(e.target.value)) {
-              setError("Invalid email format");
-            } else {
-              setError("");
-            }
-          }}
-          required
-        />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={(e) => {
+              handleChange(e);
+              if (!emailRegex.test(e.target.value)) {
+                setError("Invalid email format");
+              } else {
+                setError("");
+              }
+            }}
+            required
+          />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
 
-        {/* ✅ FIXED: name="mobileNumber" matches state key and Java Entity */}
-        <input
-          type="tel"
-          name="mobileNumber"
-          placeholder="Mobile Number"
-          value={form.mobileNumber} 
-          onChange={handleChange}
-          pattern="[0-9]{10}"
-          title="Enter 10 digit phone number"
-          required
-        />
+          <input
+            type="tel"
+            name="mobileNumber"
+            placeholder="Mobile Number"
+            value={form.mobileNumber} 
+            onChange={handleChange}
+            pattern="[0-9]{10}"
+            title="Enter 10 digit phone number"
+            required
+          />
 
-        <select
-          name="role"
-          value={form.role}
-          onChange={handleChange}
-        >
-          <option value="BUYER">Buyer</option>
-          <option value="AGENT">Agent</option>
-          <option value="ADMIN">Admin</option>
-        </select>
+          <select
+            name="role"
+            value={form.role}
+            onChange={handleChange}
+          >
+            <option value="BUYER">Buyer</option>
+            <option value="AGENT">Agent</option>
+            <option value="ADMIN">Admin</option>
+          </select>
 
-        <button type="submit">Signup</button>
-      </form>
+          <button type="submit">Signup</button>
+        </form>
+      </div>
     </div>
   );
 };
