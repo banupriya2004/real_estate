@@ -12,7 +12,7 @@ const AgentCompleteTask = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/complete-deal", {
+      const response = await fetch("https://marketplace-backend-upn5.onrender.com/api/complete-deal", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mappingId: Number(mappingId) }),

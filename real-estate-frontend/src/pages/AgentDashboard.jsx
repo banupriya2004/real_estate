@@ -18,7 +18,7 @@ const AgentDashboard = () => {
     }
 
     axios
-      .get(`http://localhost:8080/api/mappings/agent/user/${user.id}`)
+      .get(`https://marketplace-backend-upn5.onrender.com/api/mappings/agent/user/${user.id}`)
       .then((res) => {
         setMappings(res.data);
       })

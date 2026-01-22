@@ -136,7 +136,7 @@ const AddProperty = () => {
     const formData = new FormData(e.target);
 
     try {
-      const response = await fetch("http://localhost:8080/api/properties/add", {
+      const response = await fetch("https://marketplace-backend-upn5.onrender.com/api/properties/add", {
         method: "POST",
         body: formData
       });

@@ -6,7 +6,7 @@ const AdminCompletedDeals = () => {
 
   const fetchDeals = async () => {
     const response = await fetch(
-      "http://localhost:8080/api/admin/completed-deals"
+      "https://marketplace-backend-upn5.onrender.com/api/admin/completed-deals"
     );
     const data = await response.json();
     setDeals(data);
@@ -14,7 +14,7 @@ const AdminCompletedDeals = () => {
 
   const deleteDeal = async (id) => {
     await fetch(
-      `http://localhost:8080/api/admin/completed-deals/${id}`,
+      `https://marketplace-backend-upn5.onrender.com/api/admin/completed-deals/${id}`,
       { method: "DELETE" }
     );
     fetchDeals();

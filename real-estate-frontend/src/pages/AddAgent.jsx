@@ -17,7 +17,7 @@ function AddAgent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch("http://localhost:8080/api/agents", {
+    await fetch("https://marketplace-backend-upn5.onrender.com/api/agents", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(agent),
