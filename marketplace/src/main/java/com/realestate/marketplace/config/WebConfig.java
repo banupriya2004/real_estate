@@ -24,6 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
                     "https://real-estate-zmjv.vercel.app" // ✅ Allow Vercel Frontend
                 ) // allow your React frontend
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*");
+                .allowedHeaders("*")
+                .allowCredentials(true);;
     }
 }
