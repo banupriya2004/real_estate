@@ -1,34 +1,82 @@
+/* Login.css */
+
+/* 1. Main Container: Splits screen side-by-side */
+.login-page {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 2. Left Side: The Image Section (50% width) */
+.image-section {
+  flex: 1;
+  position: relative;
+}
+
+/* The actual image fits the section */
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 3. Right Side: The Form Section (50% width) */
+.form-section {
+  flex: 1;
+  display: flex;
+  align-items: center; /* Centers form vertically */
+  justify-content: center; /* Centers form horizontally */
+  background-color: #f8f9fa;
+}
+
+/* The Form Card itself */
 .auth-container {
-  width: 350px;
-  margin: 120px auto;
-  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
+/* --- Rest of the styling remains the same --- */
 .auth-container h2 {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   color: #0d2742;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .auth-container input {
   width: 100%;
-  padding: 10px;
+  padding: 12px 15px;
   margin-bottom: 15px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  transition: border 0.3s;
+}
+
+.auth-container input:focus {
+  border-color: #0d2742;
+  outline: none;
 }
 
 .auth-container button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   background: #0d2742;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
 }
 
 .auth-container button:hover {
@@ -36,39 +84,37 @@
 }
 
 .error {
-  color: red;
-  margin-bottom: 10px;
+  color: #d93025;
+  background-color: #ffe6e6;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
 }
 
 .signup-text {
-  margin-top: 15px;
-}
-.login-page {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
 }
 
-/* Background image */
-.bg-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.signup-text a {
+  color: #0d2742;
+  font-weight: 600;
+  text-decoration: none;
 }
 
-/* Login form */
-.auth-container {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* 🔥 THIS CENTERS IT */
-  background: rgba(255, 255, 255, 0.95);
-  padding: 30px;
-  width: 350px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  z-index: 1;
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile Responsiveness: On small screens, hide image and show just form */
+@media (max-width: 768px) {
+  .image-section {
+    display: none;
+  }
+  
+  .form-section {
+    background: white;
+  }
 }

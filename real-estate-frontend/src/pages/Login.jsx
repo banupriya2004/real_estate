@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Login.css";
-import background from "../assets/backgroundhome.jpg";
+import background from "../assets/house2.jpg"; // Make sure this path is correct
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -17,6 +18,7 @@ const Login = () => {
     setError("");
 
     try {
+      // Using your live backend URL
       const response = await fetch("https://marketplace-backend-upn5.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
@@ -31,10 +33,9 @@ const Login = () => {
       }
 
       if (!response.ok) {
-        setError("Login failed. Try again.");
+        setError("Login failed. Check your email or password.");
         return;
       }
-
       
       const user = await response.json();
       localStorage.setItem("user", JSON.stringify(user));
@@ -46,56 +47,56 @@ const Login = () => {
         navigate("/properties");
       } 
       else {
-        // BUYER
         navigate("/properties");
       }
 
     } catch (err) {
       console.error(err);
-      setError("Server error. Try again later.");
+      setError("Server error. Please try again later.");
     }
   };
 
   return (
-  <div className="login-page">
-    <img src={background} alt="bg" className="bg-image" />
+    <div className="login-page">
+      {/* ✅ SECTION 1: LEFT SIDE (Image) */}
+      <div className="image-section">
+        <img src={background} alt="Real Estate Background" className="bg-image" />
+      </div>
 
-    <div className="auth-container">
-      <h2>Login</h2>
+      {/* ✅ SECTION 2: RIGHT SIDE (Form) */}
+      <div className="form-section">
+        <div className="auth-container">
+          <h2>Welcome Back</h2>
 
-      {error && <p className="error">{error}</p>}
+          {error && <p className="error">{error}</p>}
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) =>
-            setForm({ ...form, email: e.target.value })
-          }
-          required
-        />
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
+            />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={(e) =>
-            setForm({ ...form, password: e.target.value })
-          }
-          required
-        />
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              required
+            />
 
-        <button type="submit">Login</button>
-      </form>
+            <button type="submit">Log In</button>
+          </form>
 
-      <p className="signup-text">
-        New user? <Link to="/signup">Create account</Link>
-      </p>
+          <p className="signup-text">
+            Don't have an account? <Link to="/signup">Create account</Link>
+          </p>
+        </div>
+      </div>
     </div>
-  </div>
-);
-
+  );
 };
 
 export default Login;
