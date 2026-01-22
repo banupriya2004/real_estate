@@ -10,7 +10,7 @@ function Agents() {
   const isAdmin = localStorage.getItem("role") === "ADMIN";
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/agents")
+    fetch("https://marketplace-backend-upn5.onrender.com/api/agents")
       .then(res => res.json())
       .then(data => setAgents(data));
   }, []);
@@ -18,7 +18,7 @@ function Agents() {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this agent?")) return;
 
-    await fetch(`http://localhost:8080/api/agents/${id}`, {
+    await fetch(`https://marketplace-backend-upn5.onrender.com/api/agents/${id}`, {
       method: "DELETE",
     });
 

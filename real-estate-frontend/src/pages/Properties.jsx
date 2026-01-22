@@ -20,7 +20,7 @@ const Properties = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/properties");
+        const res = await fetch("https://marketplace-backend-upn5.onrender.com/api/properties");
         const data = await res.json();
         setProperties(data);
         setFilteredProperties(data);
@@ -58,7 +58,7 @@ const Properties = () => {
     if (!window.confirm("Delete this property?")) return;
 
     try {
-      await fetch(`http://localhost:8080/api/properties/${id}`, {
+      await fetch(`https://marketplace-backend-upn5.onrender.com/api/properties/${id}`, {
         method: "DELETE",
       });
 
@@ -81,7 +81,7 @@ const Properties = () => {
     try {
       // Send request even if agent is null. Backend should handle "null" agent or auto-assign.
       const res = await fetch(
-        `http://localhost:8080/api/mappings/assign?buyerId=${user.id}&propertyId=${propertyId}`,
+        `https://marketplace-backend-upn5.onrender.com/api/mappings/assign?buyerId=${user.id}&propertyId=${propertyId}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -152,7 +152,7 @@ const Properties = () => {
         {filteredProperties.map((property) => (
           <div className="property-card" key={property.id}>
             <img
-              src={`http://localhost:8080/uploads/${property.imageUrls}`}
+              src={`https://marketplace-backend-upn5.onrender.com/uploads/${property.imageUrls}`}
               alt={property.title}
               onError={(e) => (e.target.style.display = "none")} 
               style={{ width: "100%", height: "180px", objectFit: "cover" }}

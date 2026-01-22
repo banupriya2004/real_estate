@@ -19,7 +19,7 @@ const EditProperty = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const res = await fetch(`http://localhost:8080/api/properties/${id}`);
+        const res = await fetch(`https://marketplace-backend-upn5.onrender.com/api/properties/${id}`);
         const data = await res.json();
         setProperty({
           title: data.title,
@@ -51,7 +51,7 @@ const EditProperty = () => {
     }
 
     try {
-      await fetch(`http://localhost:8080/api/properties/${id}`, {
+      await fetch(`https://marketplace-backend-upn5.onrender.com/api/properties/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(property)

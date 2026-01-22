@@ -10,7 +10,7 @@ const BuyerDashboard = () => {
 
     const fetchAssignedAgents = async () => {
       try {
-        const res = await fetch(`http://localhost:8080/api/mappings/buyer/${user.id}/agents`);
+        const res = await fetch(`https://marketplace-backend-upn5.onrender.com/api/mappings/buyer/${user.id}/agents`);
         if (!res.ok) throw new Error("Failed to fetch agents");
         const data = await res.json();
         setAgents(data);
