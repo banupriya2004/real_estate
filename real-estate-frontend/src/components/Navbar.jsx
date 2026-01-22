@@ -53,7 +53,7 @@ const Navbar = () => {
 
   {role === "ADMIN" && (
     <>
-      <li><Link to="/admin-dashboard">Dashboard</Link></li>
+      {/* <li><Link to="/admin-dashboard">Dashboard</Link></li> */}
       <li><Link to="/properties">Properties</Link></li>
       <li><Link to="/agents">Agents</Link></li>
       <li><Link to="/add-agent">Add Agent</Link></li>
